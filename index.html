@@ -8,15 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --navy: #1B3A5B;
-  --sb-w: 240px;        /* screen sidebar width */
-  --sb-w-print: 63.5mm; /* print sidebar width  */
-}
+:root { --navy: #1B3A5B; }
 
-/* ══════════════════════════════════════════
-   SCREEN — card layout
-══════════════════════════════════════════ */
+/* ══════════════════════════════════════════════
+   SCREEN — shows both pages as a card stack
+══════════════════════════════════════════════ */
 @media screen {
   body {
     font-family: 'DM Sans', sans-serif;
@@ -24,16 +20,23 @@
     padding: 36px 20px 56px;
     min-height: 100vh;
   }
-  .cv-wrap {
+  .page {
     width: 794px; max-width: 100%;
-    margin: 0 auto;
+    margin: 0 auto 32px;
     box-shadow: 0 8px 48px rgba(0,0,0,0.22);
-    display: flex; align-items: stretch;
+    display: flex; min-height: 600px;
   }
   .sidebar {
-    width: var(--sb-w); flex-shrink: 0;
+    width: 240px; flex-shrink: 0;
     background: var(--navy);
     padding: 28px 18px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* page 2 sidebar is just a blank navy strip */
+  .sidebar-strip {
+    width: 240px; flex-shrink: 0;
+    background: var(--navy);
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -43,11 +46,9 @@
   }
 }
 
-/* ══════════════════════════════════════════
-   SHARED TYPOGRAPHY
-══════════════════════════════════════════ */
-
-/* ── Sidebar ── */
+/* ══════════════════════════════════════════════
+   SIDEBAR ELEMENTS
+══════════════════════════════════════════════ */
 .sb-sec { margin-bottom: 18px; }
 .sb-hd {
   font-size: 11px; letter-spacing: 2px;
@@ -89,7 +90,9 @@
 .qr img { display: block; margin: 0 auto; border-radius: 5px; width: 128px; height: 128px; }
 .qr-cap { font-size: 9.5px; color: rgba(255,255,255,0.30); margin-top: 6px; line-height: 1.45; }
 
-/* ── Main column ── */
+/* ══════════════════════════════════════════════
+   MAIN CONTENT ELEMENTS
+══════════════════════════════════════════════ */
 .name-block {
   padding-bottom: 12px;
   border-bottom: 2.5px solid var(--navy);
@@ -125,16 +128,15 @@
   content: '•'; position: absolute; left: 0;
   color: var(--navy); font-weight: 700; font-size: 13px; top: 0;
 }
-.job { margin-bottom: 14px; page-break-inside: avoid; break-inside: avoid; }
+.job { margin-bottom: 14px; }
 .job:last-child { margin-bottom: 0; }
 .jh {
   display: flex; justify-content: space-between;
   align-items: baseline; margin-bottom: 1px;
-  page-break-after: avoid; break-after: avoid;
 }
 .jc { font-size: 13px; font-weight: 600; color: var(--navy); }
 .jd { font-size: 12px; color: var(--navy); font-weight: 700; white-space: nowrap; margin-left: 8px; }
-.jr { font-size: 11.5px; color: #444; font-style: italic; margin-bottom: 6px; page-break-after: avoid; break-after: avoid; }
+.jr { font-size: 11.5px; color: #444; font-style: italic; margin-bottom: 6px; }
 .cert {
   font-size: 12px; color: #2a2a2a;
   padding: 4px 0 4px 14px; position: relative;
@@ -142,7 +144,13 @@
 }
 .cert:last-child { border-bottom: none; }
 .cert::before { content: '•'; position: absolute; left: 0; color: var(--navy); font-weight: 700; font-size: 13px; top: 1px; }
-.action-bar { display: flex; gap: 10px; margin-top: 18px; padding-top: 14px; border-top: 0.5px solid #eee; }
+
+/* action bar — screen only */
+.action-bar {
+  display: flex; gap: 10px;
+  margin-top: 18px; padding-top: 14px;
+  border-top: 0.5px solid #eee;
+}
 .btn-p {
   display: inline-flex; align-items: center; gap: 6px;
   background: var(--navy); color: #fff; border: none;
@@ -160,38 +168,31 @@
 }
 .btn-o:hover { background: #f0f4f8; }
 
-/* ══════════════════════════════════════════
+/* ══════════════════════════════════════════════
    MOBILE
-══════════════════════════════════════════ */
+══════════════════════════════════════════════ */
 @media screen and (max-width: 700px) {
   body { padding: 0; background: #fff; }
-  .cv-wrap { flex-direction: column; }
-  .sidebar { width: 100%; order: 1; padding: 20px 16px; }
-  .main-col { order: 2; padding: 20px 16px; }
+  .page { flex-direction: column; margin-bottom: 0; }
+  .sidebar, .sidebar-strip { width: 100%; }
+  .sidebar-strip { display: none; }
+  .main-col { padding: 20px 16px; }
   .cv-name { font-size: 22px; }
-  .cv-role  { font-size: 9px; }
   .jh { flex-wrap: wrap; }
   .qr { display: none; }
   .action-bar { flex-direction: column; }
   .btn-p, .btn-o { flex: none; width: 100%; }
 }
 
-/* ══════════════════════════════════════════
+/* ══════════════════════════════════════════════
    PRINT
-   ─────────────────────────────────────────
-   STRATEGY:
-   • Sidebar is position:fixed → it pins to
-     the left on EVERY printed page, never
-     reflows, never repeats.  QR shows once.
-   • Body gradient paints the navy behind it
-     on every page (fallback for some engines).
-   • Main content has margin-left = sidebar
-     width so it flows naturally beside the
-     fixed sidebar across as many pages as
-     needed.
-   • @page margin-top on non-first pages adds
-     breathing room at top of page 2+.
-══════════════════════════════════════════ */
+   ─────────────────────────────────────────────
+   Each .page div = exactly one A4 page.
+   Page 1: sidebar with content + main col page1 content
+   Page 2: blank navy strip + main col page2 content
+   No content crosses page boundaries.
+   No sidebar repeating. No QR repeating.
+══════════════════════════════════════════════ */
 @media print {
 
   @page { size: A4 portrait; margin: 0; }
@@ -199,65 +200,58 @@
   html, body {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-  }
-
-  body {
     font-family: 'DM Sans', sans-serif;
-    background: none !important;
+    background: #fff !important;
     margin: 0; padding: 0;
-    width: 210mm;
   }
 
-  /* Navy stripe painted on html element — covers every page */
-  html {
-    background-image: linear-gradient(
-      to right,
-      #1B3A5B 0,
-      #1B3A5B var(--sb-w-print),
-      #ffffff var(--sb-w-print),
-      #ffffff 100%
-    ) !important;
-    background-size: 100% 100% !important;
-    background-repeat: no-repeat !important;
-    min-height: 100% !important;
+  /* Each .page is exactly one A4 page */
+  .page {
+    width: 210mm !important;
+    height: 297mm !important;
+    display: flex !important;
+    flex-direction: row !important;
+    overflow: hidden !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+  }
+
+  .page:last-child {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  .sidebar {
+    width: 63.5mm !important;
+    flex-shrink: 0 !important;
+    background: #1B3A5B !important;
+    padding: 20px 14px !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    overflow: hidden !important;
+  }
+
+  .sidebar-strip {
+    width: 63.5mm !important;
+    flex-shrink: 0 !important;
+    background: #1B3A5B !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  .cv-wrap {
-    display: block !important;
-    width: 210mm;
-    box-shadow: none;
-    background: transparent !important;
-    position: relative;
-  }
-
-  /* ── SIDEBAR: fixed to left, full page height ── */
-  .sidebar {
-    position: fixed !important;
-    top: 0 !important; left: 0 !important;
-    width: var(--sb-w-print) !important;
-    height: 100vh !important;
-    background: #1B3A5B !important;
-    padding: 20px 14px !important;
+  .main-col {
+    flex: 1 !important;
+    background: #fff !important;
+    padding: 20px 22px !important;
     overflow: hidden !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  /* ── MAIN: flows beside the fixed sidebar ── */
-  .main-col {
-    margin-left: var(--sb-w-print) !important;
-    background: #fff !important;
-    padding: 20px 22px 20px 22px !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  /* Buttons hidden */
   .action-bar { display: none !important; }
 
-  /* Colour overrides on transparent bg */
   .sb-hd  { color: rgba(255,255,255,0.95) !important; border-color: rgba(255,255,255,0.35) !important; }
   .sb-row { color: rgba(255,255,255,0.90) !important; }
   .sb-dot { color: rgba(255,255,255,0.90) !important; }
@@ -271,11 +265,12 @@
 </head>
 <body>
 
-<div class="cv-wrap">
+<!-- ══════════════════════════════════════════
+     PAGE 1 — Sidebar + first half of content
+══════════════════════════════════════════ -->
+<div class="page" id="page1">
 
-  <!-- ══════ SIDEBAR ══════ -->
   <div class="sidebar">
-
     <div class="sb-sec">
       <div class="sb-hd">Contact</div>
       <div class="sb-row">
@@ -350,17 +345,12 @@
       <div class="qr-lbl">Scan to view live CV</div>
       <img
         src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&color=1B3A5B&bgcolor=ffffff&margin=8&data=https%3A%2F%2Frkagarwal1610-cpu.github.io%2Frohit-cv%2F"
-        alt="QR code — scan to open live CV"
-        width="128" height="128" loading="eager"
-      >
+        alt="QR — scan to open live CV" width="128" height="128" loading="eager">
       <div class="qr-cap">Scan with your phone camera<br>to open this page</div>
     </div>
-
   </div><!-- /sidebar -->
 
-  <!-- ══════ MAIN ══════ -->
   <div class="main-col">
-
     <div class="name-block">
       <div class="cv-name">ROHIT KUMAR AGARWAL</div>
       <div class="cv-role">Lead Functional Associate</div>
@@ -386,7 +376,6 @@
 
     <div class="sec">
       <div class="sec-hd">Work Experience</div>
-
       <div class="job">
         <div class="jh">
           <span class="jc">Ginni Systems Limited</span>
@@ -406,6 +395,34 @@
           <li>Engage with end users to gather requirements, troubleshoot issues, and provide effective resolution guidance.</li>
         </ul>
       </div>
+    </div>
+
+    <div class="action-bar">
+      <button class="btn-p" onclick="window.print()">
+        <svg style="width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </button>
+      <button class="btn-o" id="copyBtn">
+        <svg style="width:14px;height:14px;fill:none;stroke:#1B3A5B;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51 15.42 17M15.41 7 8.59 10.49"/></svg>
+        Copy Link
+      </button>
+    </div>
+  </div><!-- /main-col page1 -->
+
+</div><!-- /page1 -->
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 2 — blank navy strip + remaining content
+══════════════════════════════════════════ -->
+<div class="page" id="page2">
+
+  <div class="sidebar-strip"></div>
+
+  <div class="main-col" style="padding-top:28px;">
+
+    <div class="sec">
+      <div class="sec-hd">Work Experience <span style="font-size:10px;font-weight:400;letter-spacing:0;text-transform:none;color:#888;">(continued)</span></div>
 
       <div class="job">
         <div class="jh">
@@ -435,20 +452,10 @@
       <div class="cert">ERP Application Support – 10+ years of hands-on experience across Retail ERP modules, incident management, troubleshooting, user support, and business process operations</div>
     </div>
 
-    <div class="action-bar">
-      <button class="btn-p" onclick="window.print()">
-        <svg style="width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download PDF
-      </button>
-      <button class="btn-o" id="copyBtn">
-        <svg style="width:14px;height:14px;fill:none;stroke:#1B3A5B;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51 15.42 17M15.41 7 8.59 10.49"/></svg>
-        Copy Link
-      </button>
-    </div>
+  </div><!-- /main-col page2 -->
 
-  </div><!-- /main-col -->
+</div><!-- /page2 -->
 
-</div><!-- /cv-wrap -->
 
 <script>
   document.getElementById('copyBtn').addEventListener('click', function () {
