@@ -2,180 +2,328 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>Rohit Kumar Agarwal – CV</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: #d6d2cc;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding: 40px 20px 60px;
-  }
+/* ══════════════════════════════════════════
+   BASE — shared by screen + print
+══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  .cv-page {
+:root {
+  --navy: #1B3A5B;
+  --navy-light: rgba(255,255,255,0.78);
+  --navy-dim:  rgba(255,255,255,0.50);
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #2a2a2a;
+  background: #ccc9c3;
+}
+
+/* ── layout grid ── */
+.cv {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  grid-template-rows: auto;
+}
+
+/* ══════════════════════════════════════════
+   SIDEBAR
+══════════════════════════════════════════ */
+.sb {
+  background: var(--navy);
+  padding: 28px 18px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sb-hd {
+  font-size: 8.5px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.60);
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255,255,255,0.18);
+  padding-bottom: 5px;
+  margin-bottom: 9px;
+}
+
+.sb-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: rgba(255,255,255,0.88);
+  font-size: 11.5px;
+  margin-bottom: 5px;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.ico {
+  width: 13px; height: 13px;
+  flex-shrink: 0; margin-top: 1px;
+  fill: none;
+  stroke: rgba(255,255,255,0.55);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sb-dot {
+  color: rgba(255,255,255,0.88);
+  font-size: 11.5px;
+  padding-left: 13px;
+  position: relative;
+  margin-bottom: 4px;
+  line-height: 1.45;
+}
+.sb-dot::before {
+  content: '▸';
+  position: absolute; left: 0;
+  color: rgba(255,255,255,0.40);
+  font-size: 8px; top: 3px;
+}
+
+/* QR */
+.qr {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  text-align: center;
+}
+.qr-lbl {
+  font-size: 7.5px; letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.40);
+  margin-bottom: 8px;
+}
+.qr img {
+  display: block; margin: 0 auto;
+  border-radius: 5px;
+  width: 130px; height: 130px;
+}
+.qr-cap {
+  font-size: 9.5px;
+  color: rgba(255,255,255,0.30);
+  margin-top: 6px; line-height: 1.45;
+}
+
+/* ══════════════════════════════════════════
+   MAIN
+══════════════════════════════════════════ */
+.mn {
+  background: #fff;
+  padding: 28px 26px;
+}
+
+.name-block {
+  padding-bottom: 12px;
+  border-bottom: 2.5px solid var(--navy);
+  margin-bottom: 18px;
+}
+.cv-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 700;
+  color: var(--navy); line-height: 1.1;
+}
+.cv-role {
+  font-size: 10px; letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: var(--navy); opacity: 0.72;
+  margin-top: 5px; font-weight: 600;
+}
+
+.sec { margin-bottom: 16px; }
+.sec:last-of-type { margin-bottom: 0; }
+
+.sec-hd {
+  font-size: 8.5px; letter-spacing: 2.5px;
+  text-transform: uppercase; font-weight: 700;
+  color: var(--navy);
+  border-bottom: 1.5px solid var(--navy);
+  padding-bottom: 3px; margin-bottom: 9px;
+}
+
+.body-txt {
+  font-size: 12px; line-height: 1.72;
+  color: #2a2a2a; text-align: justify;
+}
+
+.bl { list-style: none; padding: 0; }
+.bl li {
+  font-size: 12px; color: #2a2a2a;
+  padding: 2px 0 2px 14px;
+  position: relative; line-height: 1.52;
+}
+.bl li::before {
+  content: '•'; position: absolute; left: 0;
+  color: var(--navy); font-weight: 700;
+  font-size: 14px; top: -1px;
+}
+
+.job { margin-bottom: 14px; }
+.job:last-child { margin-bottom: 0; }
+.jh { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1px; }
+.jc { font-size: 13px; font-weight: 600; color: var(--navy); }
+.jd { font-size: 11px; color: #888; white-space: nowrap; margin-left: 8px; }
+.jr { font-size: 11.5px; color: #444; font-style: italic; margin-bottom: 6px; }
+
+.cert {
+  font-size: 12px; color: #2a2a2a;
+  padding: 4px 0 4px 14px;
+  position: relative; line-height: 1.5;
+  border-bottom: 0.5px solid #f0f0f0;
+}
+.cert:last-child { border-bottom: none; }
+.cert::before {
+  content: '•'; position: absolute; left: 0;
+  color: var(--navy); font-weight: 700;
+  font-size: 14px; top: 1px;
+}
+
+/* action bar — screen only */
+.action-bar {
+  display: flex; gap: 10px;
+  margin-top: 18px; padding-top: 14px;
+  border-top: 0.5px solid #eee;
+}
+.btn-p {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--navy); color: #fff; border: none;
+  padding: 9px 18px; border-radius: 4px;
+  font-size: 12.5px; font-weight: 500; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-p:hover { background: #244d7a; }
+.btn-o {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #fff; color: var(--navy);
+  border: 1.5px solid var(--navy);
+  padding: 9px 18px; border-radius: 4px;
+  font-size: 12.5px; font-weight: 500; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-o:hover { background: #f0f4f8; }
+
+/* ══════════════════════════════════════════
+   SCREEN — desktop wrapper (card look)
+══════════════════════════════════════════ */
+@media screen {
+  body { padding: 36px 20px 56px; }
+  .cv {
     width: 794px;
-    min-height: 1123px;
+    max-width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 8px 48px rgba(0,0,0,0.20);
+  }
+}
+
+/* ══════════════════════════════════════════
+   MOBILE — responsive stacked layout
+══════════════════════════════════════════ */
+@media screen and (max-width: 700px) {
+  body { padding: 0; background: #fff; }
+
+  .cv {
+    width: 100%;
+    grid-template-columns: 1fr;
+    box-shadow: none;
+  }
+
+  /* sidebar on top on mobile */
+  .sb {
+    order: 1;
+    padding: 22px 18px;
+    gap: 16px;
+  }
+
+  /* two-column skill grid on mobile */
+  .skills-grid {
     display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 10px;
+  }
+
+  .mn {
+    order: 2;
+    padding: 22px 18px;
+  }
+
+  .cv-name { font-size: 24px; }
+  .cv-role { font-size: 9px; }
+
+  .jh { flex-wrap: wrap; }
+  .jd { font-size: 11px; }
+
+  .qr { display: none; }   /* hide QR on mobile — they already have the link */
+
+  .action-bar { flex-direction: column; }
+  .btn-p, .btn-o { justify-content: center; }
+}
+
+/* ══════════════════════════════════════════
+   PRINT — full bleed, no margins, no borders
+══════════════════════════════════════════ */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;          /* ← kills the white border */
+  }
+
+  html, body {
+    width: 210mm;
+    height: 297mm;
+    background: none;
+    padding: 0; margin: 0;
+  }
+
+  .cv {
+    width: 210mm;
+    min-height: 297mm;
+    box-shadow: none;
     grid-template-columns: 240px 1fr;
-    box-shadow: 0 8px 48px rgba(0,0,0,0.22);
-    flex-shrink: 0;
+    page-break-inside: avoid;
   }
 
-  /* ════════ SIDEBAR ════════ */
-  .sidebar {
-    background: #1B3A5B;
-    padding: 30px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .sb-hd {
-    font-size: 9px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.75);
-    font-weight: 700;
-    border-bottom: 1px solid rgba(255,255,255,0.25);
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-  }
-  .sb-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    color: rgba(255,255,255,0.92);
-    font-size: 12px;
-    margin-bottom: 6px;
-    line-height: 1.45;
-  }
-  .sb-row .ico {
-    width: 14px; height: 14px; flex-shrink: 0; margin-top: 1px;
-    fill: none; stroke: rgba(255,255,255,0.65);
-    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
-  }
-  .sb-dot {
-    color: rgba(255,255,255,0.90);
-    font-size: 12px;
-    padding-left: 14px;
-    position: relative;
-    margin-bottom: 5px;
-    line-height: 1.45;
-  }
-  .sb-dot::before {
-    content: '▸'; position: absolute; left: 0;
-    color: rgba(255,255,255,0.55); font-size: 9px; top: 3px;
+  .action-bar { display: none; }
+
+  /* Force navy sidebar to print in colour */
+  .sb {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background: #1B3A5B !important;
+    min-height: 297mm;          /* fills full page height */
   }
 
-  /* QR block */
-  .qr-block {
-    margin-top: auto;
-    padding-top: 18px;
-    border-top: 1px solid rgba(255,255,255,0.15);
-    text-align: center;
-  }
-  .qr-lbl {
-    font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
-    color: rgba(255,255,255,0.50); margin-bottom: 9px;
-  }
-  .qr-block img {
-    display: block; margin: 0 auto;
-    border-radius: 5px; background: #fff; padding: 6px;
-    width: 140px; height: 140px;
-  }
-  .qr-cap {
-    font-size: 10px; color: rgba(255,255,255,0.38);
-    margin-top: 7px; line-height: 1.5;
+  /* ensure right column also fills height */
+  .mn {
+    min-height: 297mm;
   }
 
-  /* ════════ MAIN ════════ */
-  .main { background: #ffffff; padding: 32px 28px; }
+  .sb-hd  { color: rgba(255,255,255,0.65) !important; }
+  .sb-row { color: rgba(255,255,255,0.90) !important; }
+  .sb-dot { color: rgba(255,255,255,0.90) !important; }
+  .qr-lbl { color: rgba(255,255,255,0.45) !important; }
+  .qr-cap { color: rgba(255,255,255,0.35) !important; }
+  .ico    { stroke: rgba(255,255,255,0.60) !important; }
+}
 
-  .name-block {
-    padding-bottom: 14px;
-    border-bottom: 2.5px solid #1B3A5B;
-    margin-bottom: 20px;
-  }
-  .cv-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 30px; font-weight: 700; color: #1B3A5B; line-height: 1.1;
-  }
-  .cv-role {
-    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-    color: #1B3A5B; opacity: 0.75; margin-top: 6px; font-weight: 600;
-  }
-
-  .section { margin-bottom: 18px; }
-  .section:last-of-type { margin-bottom: 0; }
-  .sec-hd {
-    font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
-    font-weight: 700; color: #1B3A5B;
-    border-bottom: 1.5px solid #1B3A5B;
-    padding-bottom: 4px; margin-bottom: 10px;
-  }
-  .body-text { font-size: 12.5px; line-height: 1.74; color: #2a2a2a; text-align: justify; }
-
-  .blist { list-style: none; padding: 0; }
-  .blist li { font-size: 12.5px; color: #2a2a2a; padding: 2.5px 0 2.5px 15px; position: relative; line-height: 1.54; }
-  .blist li::before { content: '•'; position: absolute; left: 0; color: #1B3A5B; font-weight: 700; font-size: 14px; top: 0; }
-
-  .job { margin-bottom: 16px; }
-  .job:last-child { margin-bottom: 0; }
-  .job-hdr { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1px; }
-  .job-co { font-size: 13.5px; font-weight: 600; color: #1B3A5B; }
-  .job-dt { font-size: 11px; color: #888; }
-  .job-rl { font-size: 12px; color: #444; font-style: italic; margin-bottom: 7px; }
-
-  .cert { font-size: 12.5px; color: #2a2a2a; padding: 5px 0 5px 15px; position: relative; line-height: 1.52; border-bottom: 0.5px solid #efefef; }
-  .cert:last-child { border-bottom: none; }
-  .cert::before { content: '•'; position: absolute; left: 0; color: #1B3A5B; font-weight: 700; font-size: 14px; top: 2px; }
-
-  .action-bar { display: flex; gap: 10px; margin-top: 20px; padding-top: 16px; border-top: 0.5px solid #eee; }
-  .btn-p {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: #1B3A5B; color: #fff; border: none;
-    padding: 9px 20px; border-radius: 4px;
-    font-size: 13px; font-weight: 500; cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .btn-p:hover { background: #244d7a; }
-  .btn-o {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: #fff; color: #1B3A5B; border: 1.5px solid #1B3A5B;
-    padding: 9px 20px; border-radius: 4px;
-    font-size: 13px; font-weight: 500; cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .btn-o:hover { background: #f0f4f8; }
-
-  /* ════════ PRINT ════════ */
-  @media print {
-    body { background: none; padding: 0; margin: 0; }
-    .cv-page { width: 100%; min-height: 100vh; box-shadow: none; }
-    .action-bar { display: none; }
-    .sidebar {
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
-      background: #1B3A5B !important;
-    }
-    .sb-hd  { color: rgba(255,255,255,0.78) !important; }
-    .sb-row { color: rgba(255,255,255,0.92) !important; }
-    .sb-dot { color: rgba(255,255,255,0.92) !important; }
-  }
 </style>
 </head>
 <body>
 
-<div class="cv-page">
+<div class="cv">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
+  <!-- ══════ SIDEBAR ══════ -->
+  <aside class="sb">
 
     <div>
       <div class="sb-hd">Contact</div>
@@ -192,37 +340,41 @@
         Jaipur, Rajasthan
       </div>
       <div class="sb-row">
-        <svg class="ico" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <svg class="ico" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         linkedin.com/in/rohit-ag
       </div>
     </div>
 
     <div>
       <div class="sb-hd">Technical Profile</div>
-      <div class="sb-dot">Microsoft Office</div>
-      <div class="sb-dot">SQL / Oracle</div>
-      <div class="sb-dot">Crystal Reports</div>
-      <div class="sb-dot">Toad</div>
-      <div class="sb-dot">DevExpress (XtraReport)</div>
-      <div class="sb-dot">Exago Reports</div>
-      <div class="sb-dot">Salesforce</div>
-      <div class="sb-dot">Freshdesk</div>
-      <div class="sb-dot">ERP Application Support</div>
-      <div class="sb-dot">Incident Management</div>
-      <div class="sb-dot">Ticketing Management</div>
-      <div class="sb-dot">Knowledge Base Mgmt.</div>
+      <div class="skills-grid">
+        <div class="sb-dot">Microsoft Office</div>
+        <div class="sb-dot">SQL / Oracle</div>
+        <div class="sb-dot">Crystal Reports</div>
+        <div class="sb-dot">Toad</div>
+        <div class="sb-dot">DevExpress (XtraReport)</div>
+        <div class="sb-dot">Exago Reports</div>
+        <div class="sb-dot">Salesforce</div>
+        <div class="sb-dot">Freshdesk</div>
+        <div class="sb-dot">ERP Application Support</div>
+        <div class="sb-dot">Incident Management</div>
+        <div class="sb-dot">Ticketing Management</div>
+        <div class="sb-dot">Knowledge Base Mgmt.</div>
+      </div>
     </div>
 
     <div>
       <div class="sb-hd">Core Skills</div>
-      <div class="sb-dot">Team Leadership</div>
-      <div class="sb-dot">Problem-Solving</div>
-      <div class="sb-dot">Root Cause Analysis</div>
-      <div class="sb-dot">Escalation Management</div>
-      <div class="sb-dot">Cross-Functional Coord.</div>
-      <div class="sb-dot">Mentoring &amp; Training</div>
-      <div class="sb-dot">Time Management</div>
-      <div class="sb-dot">Effective Communication</div>
+      <div class="skills-grid">
+        <div class="sb-dot">Team Leadership</div>
+        <div class="sb-dot">Problem-Solving</div>
+        <div class="sb-dot">Root Cause Analysis</div>
+        <div class="sb-dot">Escalation Management</div>
+        <div class="sb-dot">Cross-Functional Coord.</div>
+        <div class="sb-dot">Mentoring &amp; Training</div>
+        <div class="sb-dot">Time Management</div>
+        <div class="sb-dot">Effective Communication</div>
+      </div>
     </div>
 
     <div>
@@ -235,9 +387,9 @@
       <div class="sb-hd">Education</div>
       <div class="sb-row" style="flex-direction:column;gap:2px;">
         <span style="color:#fff;font-weight:600;font-size:12px;">B.Tech. (ECE) – RTU Kota</span>
-        <span style="font-size:11px;color:rgba(255,255,255,0.55);">2012 &nbsp;|&nbsp; Honours</span>
+        <span style="font-size:11px;color:rgba(255,255,255,0.50);">2012 &nbsp;|&nbsp; Honours</span>
       </div>
-      <div class="sb-row" style="margin-top:7px;">12th – RBSE Board | 2008</div>
+      <div class="sb-row" style="margin-top:6px;">12th – RBSE Board | 2008</div>
       <div class="sb-row">10th – RBSE Board | 2006</div>
     </div>
 
@@ -247,31 +399,34 @@
       <div class="sb-row">Travelling</div>
     </div>
 
-    <!-- QR fixed to GitHub Pages URL -->
-    <div class="qr-block">
+    <div class="qr">
       <div class="qr-lbl">Scan to view live CV</div>
-      <img id="qrImg" src="" alt="QR code linking to live CV">
+      <img
+        src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&color=1B3A5B&bgcolor=ffffff&margin=8&data=https%3A%2F%2Frkagarwal1610-cpu.github.io%2Frohit-cv%2F"
+        alt="QR code — scan to open live CV"
+        width="130" height="130"
+      >
       <div class="qr-cap">Scan with your phone camera<br>to open this page</div>
     </div>
 
   </aside>
 
-  <!-- MAIN -->
-  <main class="main">
+  <!-- ══════ MAIN ══════ -->
+  <main class="mn">
 
     <div class="name-block">
       <div class="cv-name">ROHIT KUMAR AGARWAL</div>
       <div class="cv-role">Lead Functional Associate</div>
     </div>
 
-    <div class="section">
+    <div class="sec">
       <div class="sec-hd">Professional Summary</div>
-      <p class="body-text">Dedicated ERP Application Support Lead with 10+ years of experience in ERP support, incident management, root cause analysis, escalation handling, and SLA-driven service delivery. Proven ability to lead support teams, manage end-to-end ticket lifecycles, and drive process improvements to ensure business continuity and operational efficiency. Proficient in Salesforce Service Cloud, Freshdesk, SQL, Oracle Database, Crystal Reports, and DevExpress Reporting. Promoted from Senior Functional Associate to Lead Functional Associate in recognition of strong leadership, problem-solving skills, and consistent operational excellence.</p>
+      <p class="body-txt">Dedicated ERP Application Support Lead with 10+ years of experience in ERP support, incident management, root cause analysis, escalation handling, and SLA-driven service delivery. Proven ability to lead support teams, manage end-to-end ticket lifecycles, and drive process improvements to ensure business continuity and operational efficiency. Proficient in Salesforce Service Cloud, Freshdesk, SQL, Oracle Database, Crystal Reports, and DevExpress Reporting. Promoted from Senior Functional Associate to Lead Functional Associate in recognition of strong leadership, problem-solving skills, and consistent operational excellence.</p>
     </div>
 
-    <div class="section">
+    <div class="sec">
       <div class="sec-hd">Key Highlights</div>
-      <ul class="blist">
+      <ul class="bl">
         <li>10+ years of experience in ERP Application Support across L1, L2, and Team Lead roles.</li>
         <li>Promoted to Lead Functional Associate in recognition of strong performance, leadership, and operational excellence.</li>
         <li>Expertise in Incident Management, SLA Adherence, Ticket Prioritization and Assignment, Root Cause Analysis, and Escalation Management.</li>
@@ -282,16 +437,16 @@
       </ul>
     </div>
 
-    <div class="section">
+    <div class="sec">
       <div class="sec-hd">Work Experience</div>
 
       <div class="job">
-        <div class="job-hdr">
-          <span class="job-co">Ginni Systems Limited</span>
-          <span class="job-dt">2023 – Present</span>
+        <div class="jh">
+          <span class="jc">Ginni Systems Limited</span>
+          <span class="jd">2023 – Present</span>
         </div>
-        <div class="job-rl">Lead Functional Associate</div>
-        <ul class="blist">
+        <div class="jr">Lead Functional Associate</div>
+        <ul class="bl">
           <li>Lead and mentor the L1 support team, ensuring effective task allocation, prioritization, and performance management.</li>
           <li>Monitor team KPIs, SLA compliance, and ticket resolution metrics; provide performance insights and recommendations to management.</li>
           <li>Investigate and resolve complex Level 2 ERP application incidents escalated from the L1 support team.</li>
@@ -306,12 +461,12 @@
       </div>
 
       <div class="job">
-        <div class="job-hdr">
-          <span class="job-co">Ginni Systems Limited</span>
-          <span class="job-dt">2015 – 2023</span>
+        <div class="jh">
+          <span class="jc">Ginni Systems Limited</span>
+          <span class="jd">2015 – 2023</span>
         </div>
-        <div class="job-rl">Senior Functional Associate / Executive – Helpdesk</div>
-        <ul class="blist">
+        <div class="jr">Senior Functional Associate / Executive – Helpdesk</div>
+        <ul class="bl">
           <li>Managed end-to-end ERP support tickets, ensuring SLA compliance and timely incident resolution.</li>
           <li>Coordinated with L2 and L3 teams to investigate, escalate, and resolve application issues.</li>
           <li>Created and maintained Knowledge Base Articles (KBAs) and support documentation.</li>
@@ -326,7 +481,7 @@
       </div>
     </div>
 
-    <div class="section">
+    <div class="sec">
       <div class="sec-hd">Certifications &amp; Training</div>
       <div class="cert">Salesforce Service Cloud – In-house training and support operations</div>
       <div class="cert">Freshdesk Ticketing Platform – Ticket lifecycle management, workflow management, SLA monitoring, and escalation handling</div>
@@ -335,11 +490,11 @@
 
     <div class="action-bar">
       <button class="btn-p" onclick="window.print()">
-        <svg style="width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <svg style="width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Download PDF
       </button>
       <button class="btn-o" id="copyBtn">
-        <svg style="width:15px;height:15px;fill:none;stroke:#1B3A5B;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51 15.42 17M15.41 7 8.59 10.49"/></svg>
+        <svg style="width:14px;height:14px;fill:none;stroke:#1B3A5B;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51 15.42 17M15.41 7 8.59 10.49"/></svg>
         Copy Link
       </button>
     </div>
@@ -348,20 +503,12 @@
 </div>
 
 <script>
-  // Fixed GitHub Pages URL — QR always points here regardless of where page is opened
-  const CV_URL = "https://rkagarwal1610-cpu.github.io/rohit-cv/";
-
-  // Generate QR via Google Charts API (no JS library needed, works offline in print)
-  document.getElementById('qrImg').src =
-    "https://api.qrserver.com/v1/create-qr-code/?size=140x140&color=1B3A5B&bgcolor=ffffff&margin=6&data=" +
-    encodeURIComponent(CV_URL);
-
-  // Copy link button — always copies the GitHub URL
   document.getElementById('copyBtn').addEventListener('click', function () {
-    navigator.clipboard.writeText(CV_URL).then(() => {
+    const url = 'https://rkagarwal1610-cpu.github.io/rohit-cv/';
+    navigator.clipboard.writeText(url).then(() => {
       this.innerHTML = '✓ Copied!';
       setTimeout(() => {
-        this.innerHTML = '<svg style="width:15px;height:15px;fill:none;stroke:#1B3A5B;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51 15.42 17M15.41 7 8.59 10.49"/></svg> Copy Link';
+        this.innerHTML = '<svg style="width:14px;height:14px;fill:none;stroke:#1B3A5B;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51 15.42 17M15.41 7 8.59 10.49"/></svg> Copy Link';
       }, 2000);
     });
   });
