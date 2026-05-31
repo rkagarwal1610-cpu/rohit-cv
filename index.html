@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="viewport" content="width=device-width, initial-scale=0.45, maximum-scale=5.0">
 <title>Rohit Kumar Agarwal – CV</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -171,18 +171,57 @@
 /* ══════════════════════════════════════════════
    MOBILE
 ══════════════════════════════════════════════ */
+
 @media screen and (max-width: 700px) {
-  body { padding: 0; background: #fff; }
-  .page { flex-direction: column; margin-bottom: 0; }
-  .sidebar, .sidebar-strip { width: 100%; }
-  .sidebar-strip { display: none; }
-  .main-col { padding: 20px 16px; }
-  .cv-name { font-size: 22px; }
-  .jh { flex-wrap: wrap; }
-  .qr { display: none; }
-  .action-bar { flex-direction: column; }
-  .btn-p, .btn-o { flex: none; width: 100%; }
+
+  body{
+      background:#d0d0d0;
+      padding:10px;
+      overflow-x:auto;
+  }
+
+  .page{
+      width:794px !important;
+      min-width:794px !important;
+      height:auto;
+      margin:0 auto 20px;
+      display:flex;
+      flex-direction:row !important;
+  }
+
+  .sidebar,
+  .sidebar-strip{
+      width:240px !important;
+      display:block !important;
+  }
+
+  .main-col{
+      flex:1;
+  }
+
+  .qr{
+      display:block !important;
+  }
+
+  .page2-footer{
+      position:absolute;
+      left:18px;
+      right:18px;
+      bottom:25px;
+  }
+
+  .action-bar{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+  }
+
+  .btn-p,
+  .btn-o{
+      width:100%;
+  }
 }
+
 
 
 .page2-footer{
