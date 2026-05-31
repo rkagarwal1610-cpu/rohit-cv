@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="viewport" content="width=device-width, initial-scale=0.45, maximum-scale=5.0">
 <title>Rohit Kumar Agarwal – CV</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -177,26 +177,48 @@
   body{
       background:#d0d0d0;
       padding:10px;
-      overflow:auto;
+      overflow-x:auto;
   }
 
   .page{
-      width:210mm !important;
-      min-width:210mm !important;
-      height:297mm !important;
+      width:794px !important;
+      min-width:794px !important;
+      height:auto;
       margin:0 auto 20px;
-      display:flex !important;
+      display:flex;
       flex-direction:row !important;
   }
 
   .sidebar,
   .sidebar-strip{
-      width:63.5mm !important;
+      width:240px !important;
       display:block !important;
   }
 
   .main-col{
       flex:1;
+  }
+
+  .qr{
+      display:block !important;
+  }
+
+  .page2-footer{
+      position:absolute;
+      left:18px;
+      right:18px;
+      bottom:25px;
+  }
+
+  .action-bar{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+  }
+
+  .btn-p,
+  .btn-o{
+      width:100%;
   }
 }
 
@@ -449,7 +471,13 @@
       <div class="qr-cap">Scan with your phone camera<br>to open this page</div>
     </div>
     <div class="action-bar">
-      <button class="btn-p" onclick="window.print()">Download PDF</button>
+      <a class="btn-p"
+   href="./Rohit_Kumar_Agarwal_CV.pdf"
+   target="_blank"
+   download="Rohit_Kumar_Agarwal_CV.pdf"
+   style="text-decoration:none;">
+   Download PDF
+</a>
       <button class="btn-o" id="copyBtn2">Copy Link</button>
     </div>
   </div>
