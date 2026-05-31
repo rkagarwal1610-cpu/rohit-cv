@@ -8,54 +8,58 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 
-/* ══════════════════════════════════════════
-   BASE — shared by screen + print
-══════════════════════════════════════════ */
+/* ══════════════════════════════════════
+   RESET & VARIABLES
+══════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --navy: #1B3A5B; }
 
-:root {
-  --navy: #1B3A5B;
-  --navy-light: rgba(255,255,255,0.78);
-  --navy-dim:  rgba(255,255,255,0.50);
+/* ══════════════════════════════════════
+   SCREEN — wrapper
+══════════════════════════════════════ */
+@media screen {
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #ccc9c3;
+    padding: 36px 20px 56px;
+    min-height: 100vh;
+  }
+  .cv-wrap {
+    width: 794px;
+    max-width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 8px 48px rgba(0,0,0,0.20);
+    /* Use a background trick: navy left strip fills any overflow */
+    background: linear-gradient(to right, var(--navy) 240px, #fff 240px);
+  }
+  .cv-inner {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+  }
 }
 
-body {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  line-height: 1.5;
-  color: #2a2a2a;
-  background: #ccc9c3;
-}
-
-/* ── layout grid ── */
-.cv {
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  grid-template-rows: auto;
-}
-
-/* ══════════════════════════════════════════
+/* ══════════════════════════════════════
    SIDEBAR
-══════════════════════════════════════════ */
+══════════════════════════════════════ */
 .sb {
   background: var(--navy);
-  padding: 28px 18px 28px;
+  padding: 28px 18px;
   display: flex;
   flex-direction: column;
   gap: 18px;
+  /* Does NOT have min-height — let background trick handle page 2 fill */
 }
 
 .sb-hd {
   font-size: 8.5px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.60);
+  color: rgba(255,255,255,0.62);
   font-weight: 700;
   border-bottom: 1px solid rgba(255,255,255,0.18);
   padding-bottom: 5px;
   margin-bottom: 9px;
 }
-
 .sb-row {
   display: flex;
   align-items: flex-start;
@@ -66,7 +70,6 @@ body {
   line-height: 1.45;
   word-break: break-word;
 }
-
 .ico {
   width: 13px; height: 13px;
   flex-shrink: 0; margin-top: 1px;
@@ -76,7 +79,6 @@ body {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-
 .sb-dot {
   color: rgba(255,255,255,0.88);
   font-size: 11.5px;
@@ -92,6 +94,9 @@ body {
   font-size: 8px; top: 3px;
 }
 
+/* Skills 2-col grid */
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8px; }
+
 /* QR */
 .qr {
   margin-top: auto;
@@ -102,13 +107,13 @@ body {
 .qr-lbl {
   font-size: 7.5px; letter-spacing: 1.8px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.40);
+  color: rgba(255,255,255,0.42);
   margin-bottom: 8px;
 }
 .qr img {
   display: block; margin: 0 auto;
   border-radius: 5px;
-  width: 130px; height: 130px;
+  width: 128px; height: 128px;
 }
 .qr-cap {
   font-size: 9.5px;
@@ -116,9 +121,9 @@ body {
   margin-top: 6px; line-height: 1.45;
 }
 
-/* ══════════════════════════════════════════
+/* ══════════════════════════════════════
    MAIN
-══════════════════════════════════════════ */
+══════════════════════════════════════ */
 .mn {
   background: #fff;
   padding: 28px 26px;
@@ -141,7 +146,7 @@ body {
   margin-top: 5px; font-weight: 600;
 }
 
-.sec { margin-bottom: 16px; }
+.sec { margin-bottom: 15px; }
 .sec:last-of-type { margin-bottom: 0; }
 
 .sec-hd {
@@ -151,12 +156,10 @@ body {
   border-bottom: 1.5px solid var(--navy);
   padding-bottom: 3px; margin-bottom: 9px;
 }
-
 .body-txt {
   font-size: 12px; line-height: 1.72;
   color: #2a2a2a; text-align: justify;
 }
-
 .bl { list-style: none; padding: 0; }
 .bl li {
   font-size: 12px; color: #2a2a2a;
@@ -166,16 +169,14 @@ body {
 .bl li::before {
   content: '•'; position: absolute; left: 0;
   color: var(--navy); font-weight: 700;
-  font-size: 14px; top: -1px;
+  font-size: 13px; top: 0px;
 }
-
 .job { margin-bottom: 14px; }
 .job:last-child { margin-bottom: 0; }
 .jh { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1px; }
 .jc { font-size: 13px; font-weight: 600; color: var(--navy); }
 .jd { font-size: 11px; color: #888; white-space: nowrap; margin-left: 8px; }
 .jr { font-size: 11.5px; color: #444; font-style: italic; margin-bottom: 6px; }
-
 .cert {
   font-size: 12px; color: #2a2a2a;
   padding: 4px 0 4px 14px;
@@ -186,10 +187,10 @@ body {
 .cert::before {
   content: '•'; position: absolute; left: 0;
   color: var(--navy); font-weight: 700;
-  font-size: 14px; top: 1px;
+  font-size: 13px; top: 1px;
 }
 
-/* action bar — screen only */
+/* action bar */
 .action-bar {
   display: flex; gap: 10px;
   margin-top: 18px; padding-top: 14px;
@@ -198,129 +199,130 @@ body {
 .btn-p {
   display: inline-flex; align-items: center; gap: 6px;
   background: var(--navy); color: #fff; border: none;
-  padding: 9px 18px; border-radius: 4px;
-  font-size: 12.5px; font-weight: 500; cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
+  padding: 10px 20px; border-radius: 4px;
+  font-size: 13px; font-weight: 500; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; flex: 1; justify-content: center;
 }
 .btn-p:hover { background: #244d7a; }
 .btn-o {
   display: inline-flex; align-items: center; gap: 6px;
   background: #fff; color: var(--navy);
   border: 1.5px solid var(--navy);
-  padding: 9px 18px; border-radius: 4px;
-  font-size: 12.5px; font-weight: 500; cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
+  padding: 10px 20px; border-radius: 4px;
+  font-size: 13px; font-weight: 500; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; flex: 1; justify-content: center;
 }
 .btn-o:hover { background: #f0f4f8; }
 
-/* ══════════════════════════════════════════
-   SCREEN — desktop wrapper (card look)
-══════════════════════════════════════════ */
-@media screen {
-  body { padding: 36px 20px 56px; }
-  .cv {
-    width: 794px;
-    max-width: 100%;
-    margin: 0 auto;
-    box-shadow: 0 8px 48px rgba(0,0,0,0.20);
-  }
-}
-
-/* ══════════════════════════════════════════
-   MOBILE — responsive stacked layout
-══════════════════════════════════════════ */
+/* ══════════════════════════════════════
+   MOBILE — stacked, full width
+══════════════════════════════════════ */
 @media screen and (max-width: 700px) {
   body { padding: 0; background: #fff; }
-
-  .cv {
+  .cv-wrap {
     width: 100%;
-    grid-template-columns: 1fr;
     box-shadow: none;
+    background: #fff;   /* no gradient on mobile */
   }
-
-  /* sidebar on top on mobile */
+  .cv-inner {
+    display: flex;
+    flex-direction: column;
+  }
   .sb {
-    order: 1;
+    width: 100%;
     padding: 22px 18px;
+    order: 1;
     gap: 16px;
   }
-
-  /* two-column skill grid on mobile */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 10px;
-  }
-
+  /* 2-col skills already via .sg grid */
   .mn {
     order: 2;
     padding: 22px 18px;
+    width: 100%;
   }
-
-  .cv-name { font-size: 24px; }
-  .cv-role { font-size: 9px; }
-
+  .cv-name { font-size: 22px; }
+  .cv-role { font-size: 9px; letter-spacing: 1.8px; }
   .jh { flex-wrap: wrap; }
-  .jd { font-size: 11px; }
-
-  .qr { display: none; }   /* hide QR on mobile — they already have the link */
-
+  .qr { display: none; }
   .action-bar { flex-direction: column; }
-  .btn-p, .btn-o { justify-content: center; }
 }
 
-/* ══════════════════════════════════════════
-   PRINT — full bleed, no margins, no borders
-══════════════════════════════════════════ */
+/* ══════════════════════════════════════
+   PRINT — full bleed A4, navy fills page
+══════════════════════════════════════ */
 @media print {
   @page {
     size: A4 portrait;
-    margin: 0;          /* ← kills the white border */
+    margin: 0;
   }
 
-  html, body {
-    width: 210mm;
-    height: 297mm;
+  html { height: 100%; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
     background: none;
     padding: 0; margin: 0;
+    height: 100%;
   }
 
-  .cv {
+  /* Outer wrapper uses background gradient so navy fills both pages */
+  .cv-wrap {
     width: 210mm;
     min-height: 297mm;
-    box-shadow: none;
+    /* gradient fills the full column width with navy behind the sidebar */
+    background: linear-gradient(to right, #1B3A5B 240px, #fff 240px) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    display: block;
+  }
+
+  .cv-inner {
+    display: grid;
     grid-template-columns: 240px 1fr;
-    page-break-inside: avoid;
+    min-height: 297mm;
   }
 
   .action-bar { display: none; }
 
-  /* Force navy sidebar to print in colour */
+  /* Sidebar: transparent bg — the gradient wrapper provides the navy colour */
   .sb {
+    background: transparent !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-    background: #1B3A5B !important;
-    min-height: 297mm;          /* fills full page height */
+    padding-top: 28px;
   }
 
-  /* ensure right column also fills height */
+  /* Page 2 sidebar: add top padding so content doesn't start at very top */
+  .sb { padding-top: 28px; }
+
   .mn {
-    min-height: 297mm;
+    background: #fff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  .sb-hd  { color: rgba(255,255,255,0.65) !important; }
+  /* keep navy text/elements visible on transparent sidebar */
+  .sb-hd  { color: rgba(255,255,255,0.65) !important; border-bottom-color: rgba(255,255,255,0.18) !important; }
   .sb-row { color: rgba(255,255,255,0.90) !important; }
   .sb-dot { color: rgba(255,255,255,0.90) !important; }
+  .sb-dot::before { color: rgba(255,255,255,0.42) !important; }
   .qr-lbl { color: rgba(255,255,255,0.45) !important; }
   .qr-cap { color: rgba(255,255,255,0.35) !important; }
-  .ico    { stroke: rgba(255,255,255,0.60) !important; }
+  .ico    { stroke: rgba(255,255,255,0.58) !important; }
+
+  /* page 2 gap — push content down from the top edge on second page */
+  .page2-gap { display: block; height: 24px; }
 }
+
+/* hide page2-gap on screen */
+@media screen { .page2-gap { display: none; } }
 
 </style>
 </head>
 <body>
 
-<div class="cv">
+<div class="cv-wrap">
+ <div class="cv-inner">
 
   <!-- ══════ SIDEBAR ══════ -->
   <aside class="sb">
@@ -347,7 +349,7 @@ body {
 
     <div>
       <div class="sb-hd">Technical Profile</div>
-      <div class="skills-grid">
+      <div class="sg">
         <div class="sb-dot">Microsoft Office</div>
         <div class="sb-dot">SQL / Oracle</div>
         <div class="sb-dot">Crystal Reports</div>
@@ -365,7 +367,7 @@ body {
 
     <div>
       <div class="sb-hd">Core Skills</div>
-      <div class="skills-grid">
+      <div class="sg">
         <div class="sb-dot">Team Leadership</div>
         <div class="sb-dot">Problem-Solving</div>
         <div class="sb-dot">Root Cause Analysis</div>
@@ -402,9 +404,10 @@ body {
     <div class="qr">
       <div class="qr-lbl">Scan to view live CV</div>
       <img
-        src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&color=1B3A5B&bgcolor=ffffff&margin=8&data=https%3A%2F%2Frkagarwal1610-cpu.github.io%2Frohit-cv%2F"
+        src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&color=1B3A5B&bgcolor=ffffff&margin=8&data=https%3A%2F%2Frkagarwal1610-cpu.github.io%2Frohit-cv%2F"
         alt="QR code — scan to open live CV"
-        width="130" height="130"
+        width="128" height="128"
+        loading="eager"
       >
       <div class="qr-cap">Scan with your phone camera<br>to open this page</div>
     </div>
@@ -413,6 +416,9 @@ body {
 
   <!-- ══════ MAIN ══════ -->
   <main class="mn">
+
+    <!-- page 2 top gap (print only) -->
+    <div class="page2-gap"></div>
 
     <div class="name-block">
       <div class="cv-name">ROHIT KUMAR AGARWAL</div>
@@ -500,7 +506,9 @@ body {
     </div>
 
   </main>
-</div>
+
+ </div><!-- /cv-inner -->
+</div><!-- /cv-wrap -->
 
 <script>
   document.getElementById('copyBtn').addEventListener('click', function () {
