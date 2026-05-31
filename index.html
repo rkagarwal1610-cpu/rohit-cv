@@ -184,6 +184,30 @@
   .btn-p, .btn-o { flex: none; width: 100%; }
 }
 
+
+.page2-footer{
+    position:absolute;
+    left:18px;
+    right:18px;
+    bottom:25px;
+}
+.sidebar-strip{
+    position:relative;
+}
+.page2-footer .action-bar{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-top:12px;
+    border-top:none;
+    padding-top:0;
+}
+.page2-footer .btn-p,
+.page2-footer .btn-o{
+    width:100%;
+}
+
+
 /* ══════════════════════════════════════════════
    PRINT
    ─────────────────────────────────────────────
@@ -340,14 +364,6 @@
       <div class="sb-row">Listening to Music</div>
       <div class="sb-row">Travelling</div>
     </div>
-
-    <div class="qr">
-      <div class="qr-lbl">Scan to view live CV</div>
-      <img
-        src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&color=1B3A5B&bgcolor=ffffff&margin=8&data=https%3A%2F%2Frkagarwal1610-cpu.github.io%2Frohit-cv%2F"
-        alt="QR — scan to open live CV" width="128" height="128" loading="eager">
-      <div class="qr-cap">Scan with your phone camera<br>to open this page</div>
-    </div>
   </div><!-- /sidebar -->
 
   <div class="main-col">
@@ -396,17 +412,6 @@
         </ul>
       </div>
     </div>
-
-    <div class="action-bar">
-      <button class="btn-p" onclick="window.print()">
-        <svg style="width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download PDF
-      </button>
-      <button class="btn-o" id="copyBtn">
-        <svg style="width:14px;height:14px;fill:none;stroke:#1B3A5B;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51 15.42 17M15.41 7 8.59 10.49"/></svg>
-        Copy Link
-      </button>
-    </div>
   </div><!-- /main-col page1 -->
 
 </div><!-- /page1 -->
@@ -417,7 +422,22 @@
 ══════════════════════════════════════════ -->
 <div class="page" id="page2">
 
-  <div class="sidebar-strip"></div>
+  
+<div class="sidebar-strip">
+  <div class="page2-footer">
+    <div class="qr">
+      <div class="qr-lbl">Scan to view live CV</div>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&color=1B3A5B&bgcolor=ffffff&margin=8&data=https%3A%2F%2Frkagarwal1610-cpu.github.io%2Frohit-cv%2F"
+      alt="QR Code" width="128" height="128">
+      <div class="qr-cap">Scan with your phone camera<br>to open this page</div>
+    </div>
+    <div class="action-bar">
+      <button class="btn-p" onclick="window.print()">Download PDF</button>
+      <button class="btn-o" id="copyBtn2">Copy Link</button>
+    </div>
+  </div>
+</div>
+
 
   <div class="main-col" style="padding-top:28px;">
 
@@ -467,6 +487,15 @@
       }, 2000);
     });
   });
+
+document.getElementById('copyBtn2').addEventListener('click', function () {
+    const url = 'https://rkagarwal1610-cpu.github.io/rohit-cv/';
+    navigator.clipboard.writeText(url).then(() => {
+        this.innerHTML = '✓ Copied!';
+        setTimeout(() => { this.innerHTML = 'Copy Link'; }, 2000);
+    });
+});
+
 </script>
 
 </body>
