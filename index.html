@@ -175,35 +175,28 @@
 @media screen and (max-width: 700px) {
 
   body{
-      margin:0;
-      padding:10px;
-      overflow-x:auto;
       background:#d0d0d0;
+      padding:10px;
+      overflow:auto;
   }
 
   .page{
-      width:794px !important;
-      min-width:794px !important;
+      width:210mm !important;
+      min-width:210mm !important;
+      height:297mm !important;
+      margin:0 auto 20px;
       display:flex !important;
       flex-direction:row !important;
-      margin:0 auto 20px;
   }
 
   .sidebar,
   .sidebar-strip{
-      width:240px !important;
+      width:63.5mm !important;
       display:block !important;
   }
 
-  .qr{
-      display:block !important;
-  }
-
-  .page2-footer{
-      position:absolute;
-      left:18px;
-      right:18px;
-      bottom:25px;
+  .main-col{
+      flex:1;
   }
 }
 
@@ -456,7 +449,7 @@
       <div class="qr-cap">Scan with your phone camera<br>to open this page</div>
     </div>
     <div class="action-bar">
-      <button class="btn-p" onclick="downloadPDF()">Download PDF</button>
+      <button class="btn-p" onclick="window.print()">Download PDF</button>
       <button class="btn-o" id="copyBtn2">Copy Link</button>
     </div>
   </div>
@@ -522,20 +515,5 @@ document.getElementById('copyBtn2').addEventListener('click', function () {
 
 </script>
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script>
-function downloadPDF(){
-    const element = document.body;
-    html2pdf().set({
-        margin:0,
-        filename:'Rohit_Kumar_Agarwal_CV.pdf',
-        image:{type:'jpeg',quality:1},
-        html2canvas:{scale:2,useCORS:true},
-        jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
-        pagebreak:{mode:['css','legacy']}
-    }).from(element).save();
-}
-</script>
 </body>
 </html>
