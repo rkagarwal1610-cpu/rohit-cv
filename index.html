@@ -175,6 +175,12 @@
 .jh {
   display: flex; justify-content: space-between;
   align-items: baseline; margin-bottom: 1px;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+.job {
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 .jc { font-size: 13px; font-weight: 600; color: var(--navy); }
 .jd { font-size: 12px; color: #1B3A5B; font-weight: 700; white-space: nowrap; margin-left: 8px; }
@@ -249,8 +255,8 @@
   @page :first {
     margin-top: 0;
   }
-  @page :left, @page :right {
-    margin-top: 14mm;
+  @page :not(:first) {
+    margin-top: 18mm;
   }
 
   html {
@@ -273,6 +279,7 @@
     ) !important;
     background-size: 210mm 100% !important;
     background-repeat: repeat-y !important;
+    background-attachment: local !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
